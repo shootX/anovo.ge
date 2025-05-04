@@ -40,6 +40,25 @@ document.addEventListener("DOMContentLoaded", function () {
           if (price) price.textContent = s.price;
         }
       });
+      // Why choose us
+      const whySection = document.querySelector('section.bg-red-500.rounded-t-3xl .grid');
+      if (whySection && data.why && data.why.length) {
+        whySection.innerHTML = '';
+        data.why.forEach(function(w) {
+          const color = w.color || 'bg-transparent';
+          const icon = w.icon || '';
+          const number = w.number || '';
+          const text = w.text || '';
+          whySection.innerHTML += `<div class="${color} p-6 rounded-xl">
+            ${icon ? `<span class='d-block mb-2'><i class='${icon}'></i></span>` : ''}
+            <p class='text-5xl font-bold mb-2'>${number}</p>
+            <p class='text-sm'>${text}</p>
+          </div>`;
+        });
+      }
+      // Why choose us title
+      const whyTitle = document.querySelector('section.bg-red-500.rounded-t-3xl h2');
+      if(whyTitle && data.why_title) whyTitle.textContent = data.why_title;
     })
     .catch(err => console.error("Failed to load content.json", err));
 });

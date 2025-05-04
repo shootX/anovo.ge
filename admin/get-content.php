@@ -12,7 +12,8 @@ if ($mysqli->connect_error) {
 $data = [
     "hero" => [],
     "features" => [],
-    "services" => []
+    "services" => [],
+    "why" => []
 ];
 
 // HERO
@@ -50,5 +51,21 @@ foreach ($res as $row) {
     }
 }
 $data["services"] = array_values($services);
+
+// WHY
+$res = $mysqli->query("SELECT field, value FROM content WHERE section = 'why'");
+$why = [];
+$why_title = '';
+foreach ($res as $row) {
+    if ($row["field"] === "title") $why_title = $row["value"];
+    if (preg_match("/^(\d+)_(number|text|color|icon)$/", $row["field"], $m)) {
+        $idx = (int)$m[1];
+        $type = $m[2];
+        if (!isset($why[$idx])) $why[$idx] = [];
+        $why[$idx][$type] = $row["value"];
+    }
+}
+$data["why_title"] = $why_title;
+$data["why"] = array_values($why);
 
 echo json_encode($data, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT); 
