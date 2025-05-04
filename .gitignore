@@ -1,0 +1,35 @@
+# OS files
+.DS_Store
+Thumbs.db
+
+# Log files
+*.log
+
+# Composer
+/vendor/
+composer.lock
+
+# Node
+/node_modules/
+
+# Env files
+.env
+.env.*
+
+# IDEs
+.idea/
+.vscode/
+
+# Backup files
+*.bak
+*.tmp
+
+# Uploads/cache
+/cache/
+/uploads/
+
+# Sensitive files
+config.php
+
+# Others
+*.swp 
